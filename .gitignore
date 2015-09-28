@@ -249,5 +249,5 @@ cmake-build/
 *.bak
 
 *.o-i386
-
+*.o-x86_64
 
