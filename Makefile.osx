@@ -6,12 +6,15 @@ include Makefile.srcs
 
 # Find SDK path via xcode-select, backwards compatible with Xcode vers < 4.5
 MACOSX_SYSROOT = $(shell xcrun --show-sdk-path)
+# Specify deployement target here
+MACOSX_DEPLOYMENT_TARGET = 10.11
 
 # General configuration variables:
 CC_I386 = $(shell xcrun -find clang)
 CC_X86_64 = $(shell xcrun -find clang)
 CPP_I386 = $(shell xcrun -find clang++)
 CPP_X86_64 = $(shell xcrun -find clang++)
+MACOSX_DEPLOY = -mmacosx-version-min=$(MACOSX_DEPLOYMENT_TARGET)
 COMPILERFLAGS = -Os -fexceptions -fvisibility=hidden -DNO_LCMS -D__ANSI__
 COMPILERFLAGS_I386 = -arch i386
 COMPILERFLAGS_X86_64 = -arch x86_64
@@ -19,12 +22,12 @@ COMPILERPPFLAGS = -Wno-ctor-dtor-privacy -D__ANSI__ -std=c++11 -stdlib=libc++ -W
 INCLUDE +=
 INCLUDE_I386 = -isysroot $(MACOSX_SYSROOT)
 INCLUDE_X86_64 = -isysroot $(MACOSX_SYSROOT)
-CFLAGS_I386 = $(COMPILERFLAGS) $(COMPILERFLAGS_I386) $(INCLUDE) $(INCLUDE_I386)
-CFLAGS_X86_64 = $(COMPILERFLAGS) $(COMPILERFLAGS_X86_64) $(INCLUDE) $(INCLUDE_X86_64)
+CFLAGS_I386 = $(COMPILERFLAGS) $(COMPILERFLAGS_I386) $(INCLUDE) $(INCLUDE_I386) $(MACOSX_DEPLOY)
+CFLAGS_X86_64 = $(COMPILERFLAGS) $(COMPILERFLAGS_X86_64) $(INCLUDE) $(INCLUDE_X86_64) $(MACOSX_DEPLOY)
 CPPFLAGS_I386 = $(COMPILERPPFLAGS) $(CFLAGS_I386)
 CPPFLAGS_X86_64 = $(COMPILERPPFLAGS) $(CFLAGS_X86_64)
-LIBRARIES_I386 = -Wl,-syslibroot $(MACOSX_SYSROOT)
-LIBRARIES_X86_64 = -Wl,-syslibroot $(MACOSX_SYSROOT)
+LIBRARIES_I386 = $(MACOSX_DEPLOY) -Wl,-syslibroot $(MACOSX_SYSROOT)
+LIBRARIES_X86_64 = $(MACOSX_DEPLOY) -Wl,-syslibroot $(MACOSX_SYSROOT)
 LIBTOOL = libtool
 LIPO = lipo
 
