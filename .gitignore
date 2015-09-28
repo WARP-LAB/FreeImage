@@ -254,3 +254,4 @@ cmake-build/
 *.dylib-x86_64
 *.a-i386
 *.a-x86_64
+Dist/*.*
