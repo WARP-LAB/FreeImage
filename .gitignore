@@ -250,4 +250,7 @@ cmake-build/
 
 *.o-i386
 *.o-x86_64
-
+*.dylib-i386
+*.dylib-x86_64
+*.a-i386
+*.a-x86_64
