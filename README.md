@@ -2,7 +2,7 @@
 
 This is FreeImage 3.17.0 clone to be used when building LuxRender (on OS X)
 
-* It has general fixes so it can be copiled with C++11 and -Wc++11-narrowing
+* It has general fixes so that it can be compiled with C++11 and -Wc++11-narrowing
 * It has altered `Makefile.osx`
 	* Builds only 64 bit
 	* Specify `MACOSX_DEPLOYMENT_TARGET`
